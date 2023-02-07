@@ -30,7 +30,7 @@ int main()
 	}
 	// Test printing of individual timer
 	{
-		Timer timer3("timer3", timeUnit::MICROSECONDS);
+		Timer timer3("timer3", timeUnit::SECONDS);
 		std::cout << timer3 << std::endl;
 		Timer timer4("timer4", timeUnit::MILISECONDS);
 		std::cout << timer3 << std::endl;
