@@ -21,8 +21,10 @@ int main()
 	// Test automatic deletion of timer and print
 	{
 		{
-			Timer timer("timer1", timeUnit::MICROSECONDS);
+			Timer timer1("timer1", timeUnit::MICROSECONDS);
 			Timer timer2("timer2", timeUnit::MILISECONDS);
+			Timer timer3("timer3", timeUnit::SECONDS);
+			timer3.endMeasurement();
 		}
 		std::cout << EasyTimer::getEasyTimer() << std::endl;
 	}
@@ -33,6 +35,16 @@ int main()
 		Timer timer4("timer4", timeUnit::MILISECONDS);
 		std::cout << timer3 << std::endl;
 		std::cout << timer4 << std::endl;
+	}
+	// Test that average of two timers is taken
+	{
+		{
+			Timer timer1("timer1", timeUnit::MICROSECONDS);
+		}
+		{
+			Timer timer1("timer1", timeUnit::MICROSECONDS);
+		}
+		std::cout << EasyTimer::getEasyTimer() << std::endl;
 	}
 	// Test multithreading
 	{
