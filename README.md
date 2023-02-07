@@ -56,20 +56,50 @@ To print the results. Add the following line to your code:
 std::cout << EasyTimer::getEasyTimer() << std::endl;
 ```
 
-An example output is like this:
+# Example
+
+```C++
+#include "EasyTimer.h"
+#include <iostream>
+#include <thread>
+#include <vector>
+
+void runThreadTask(std::string timerName, int numLoops)
+{
+  for (int i = 0; i < numLoops; i++)
+  {
+    Timer timer(timerName, timeUnit::MICROSECONDS);
+    int sum = 0;
+    for (int n = 0; n < 1000; n++)
+    {
+       sum++;
+    }
+  }
+}
+
+int main()
+{
+  int numThreads = 8;
+  std::vector<std::thread> threads;
+  for (int i = 0; i < numThreads; i++)
+  {
+    // Even and odd threads share their respective timer name
+    std::string timerName = "thread_timer_" + std::to_string( (i%2) + 1 );
+    threads.push_back(std::thread{runThreadTask, timerName, 100});
+  }
+  for (auto& thread : threads)
+  {
+    thread.join();
+  }
+  std::cout << EasyTimer::getEasyTimer() << std::endl;
+  return 0;
+}
+```
+
+The output would be like this:
 
 ```
 Name,Time,Count
-timer3,134s,3
-thread_timer_4,3us,100
-timer2,0ms,1
-timer1,12us,3
-thread_timer_2,2us,100
-timer4,0ms,1
-thread_timer_1,2us,100
-thread_timer_3,5us,100
-thread_timer_5,2us,100
-thread_timer_6,2us,100
-thread_timer_7,5us,100
-thread_timer_8,10us,100
+thread_timer_2,3us,400
+thread_timer_1,7us,400
 ```
