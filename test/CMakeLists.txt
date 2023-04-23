@@ -7,4 +7,4 @@ add_executable(EasyTimerTs
 
 target_include_directories(EasyTimerTs PRIVATE .)
 
-target_link_libraries(EasyTimerTs PRIVATE EasyTimer)
+target_link_libraries(EasyTimerTs PRIVATE EasyTimer pthread)
